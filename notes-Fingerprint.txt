@@ -1,0 +1,24 @@
+//Security
+
+https://askubuntu.com/questions/644020/how-to-generate-openssl-pem-file-and-where-we-have-to-place-it#:~:text=Generate%20the%20key%20with%20%24%20ssh,one%20will%20be%20my%2Dcertificate.
+
+
+// generating RSA certificate
+sudo openssl genrsa -des3 -out server.key 2048
+openssl req -new -key server.key -out server.csr
+openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+openssl x509 -inform DER -outform PEM -in server.crt -out server.crt.pem
+
+// converting cer file to pem 
+openssl x509 -inform der -in certificate.cer -out certificate.pem
+
+
+// sha certificate to fingerprint
+SHA-256. openssl x509 -noout -fingerprint -sha256 -inform pem -in [certificate-file.crt]
+
+SHA-1. openssl x509 -noout -fingerprint -sha1 -inform pem -in [certificate-file.crt]
+
+// PEM:-	privacy enhancement mailing
+// DER:-	Distinguished Encoding Rules
+// RSA:-	Rivest, Shamir, Adleman
+// ppk:-	Putty Private Key
